@@ -1,20 +1,31 @@
 import { useSelector } from "react-redux"
 import AddForm from "./AddForm";
+import { useDispatch } from "react-redux";
+import { deleteTodo } from "../features/todo/todoSlice";
 
-export default function Todo(){
+export default function Todo() {
     const todos = useSelector((state) => state.todos);
-    console.log(todos);
+    // console.log(todos);
+    const dispatch = useDispatch();
 
-    return(
+    const clickHandler = (id) => {
+        // console.log("delete", id);
+        dispatch(deleteTodo(id));
+    };
+
+    return (
         <>
-        <AddForm/>
-        <h2>Todo List App</h2>
-        {/* printing todo in ui */}
-        <ul>
-            {todos.map((todo) => (
-                <li key={todo.id}>{todo.task}</li>
+            <AddForm />
+            <h2>Todo List App</h2>
+            {/* printing todo in ui */}
+            <ul>
+                {todos.map((todo) => (
+                    <li key={todo.id}>{todo.task}
+                        &nbsp; &nbsp; &nbsp;
+                        <button onClick={() => clickHandler(todo.id)}>Delete</button>
+                    </li>
                 ))}
-        </ul>
+            </ul>
         </>
     );
 }

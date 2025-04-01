@@ -8,8 +8,9 @@ export default function AddForm() {
 
     const submitHandler = (evt) => {
         evt.preventDefault();
-        console.log(task);
+        // console.log(task);
         dispatch(addTodo(task));
+        setTask("");
     }
 
     return (
